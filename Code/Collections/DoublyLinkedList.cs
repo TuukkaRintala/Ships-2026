@@ -116,7 +116,7 @@ namespace GA.Collections
 
 			Node current = Head;
 			Node previous = null;
-			
+
 			while (current != null)
 			{
 				Node next = current.Next;
@@ -127,13 +127,19 @@ namespace GA.Collections
 					{
 						// Removing any other element than the first.
 						previous.Next = current.Next;
-						next.Previous = current.Previous;
+						if (next != null)
+						{
+							next.Previous = current.Previous;
+						}
 					}
 					else
 					{
 						// Removing the first element.
 						Head = current.Next;
-						next.Previous = Head;
+						if (next != null)
+						{
+							next.Previous = Head;
+						}
 					}
 
 					Count--;
