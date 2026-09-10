@@ -76,7 +76,7 @@ namespace GA.Collections
 		public bool Contains(T item)
 		{
 			Node current = Head;
-			
+
 			while (current != null)
 			{
 				if (EqualityComparer<T>.Default.Equals(current.Value, item))
@@ -116,10 +116,11 @@ namespace GA.Collections
 
 			Node current = Head;
 			Node previous = null;
-			Node next = Head.Next;
-
+			
 			while (current != null)
 			{
+				Node next = current.Next;
+
 				if (EqualityComparer<T>.Default.Equals(current.Value, item))
 				{
 					if (previous != null)
@@ -138,11 +139,10 @@ namespace GA.Collections
 					Count--;
 					return true;
 				}
-				
+
 				// Move to the next node in the list, and note its neighours
 				previous = current;
 				current = current.Next;
-				next = current.Next;
 			}
 
 			return false;
