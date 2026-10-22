@@ -2,12 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://brkg6cooepb7r" path="res://Art/Models/GLB format/ship-small.glb" id="1_v5ojx"]
 [ext_resource type="Script" uid="uid://bbeubhgnw3on" path="res://Code/Ship/ShipVisual.cs" id="2_khmyu"]
+[ext_resource type="Script" uid="uid://c1c0mhln5j3fk" path="res://Code/Ship/PlayerShip.cs" id="2_mc6rq"]
+[ext_resource type="Resource" uid="uid://dp7egbqp41vi2" path="res://Data/PlayerShipData.tres" id="3_nkep0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yky2d"]
 radius = 2.1430664
 height = 7.6814575
 
 [node name="SmallShip" unique_id=1755950333 instance=ExtResource("1_v5ojx")]
+script = ExtResource("2_mc6rq")
+_shipData = ExtResource("3_nkep0")
 
 [node name="ship-small" parent="." index="0" unique_id=1519176473]
 script = ExtResource("2_khmyu")
