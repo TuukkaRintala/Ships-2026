@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GA.Common;
 using GA.Ships.Pathfinding;
@@ -13,7 +14,7 @@ namespace GA.Ships
 		private float _pathfindingTimer = 0;
 
 		// Path returned by the pathfinder to the target.
-		private List<Vector3> _pathfindingPath = null;
+		private List<Vector3> _pathfindingPath = new List<Vector3>();
 		[Export] private PathPostprocessorResource[] _pathPostprocessors = null;
 
 		#endregion Pathfinding
@@ -67,6 +68,12 @@ namespace GA.Ships
 			}
 		}
 
+		public Vector3 CurrentPathfindingDirection
+		{
+			get;
+			set;
+		}
+
 		public override void _Ready()
 		{
 			base._Ready();
@@ -115,7 +122,7 @@ namespace GA.Ships
 				_pathfindingPath.Add(cellPosition);
 			}
 
-			// TODO: Draw path for debugging.
+			Level.Current.DrawPath(_pathfindingPath);
 		}
 
 		public void AdvancePatrolIndex()
@@ -132,8 +139,20 @@ namespace GA.Ships
 		{
 			if (_pathfindingPath != null && _pathfindingPath.Count > 0)
 			{
+				if (_pathfindingPath.Count > 1)
+				{
+					CurrentPathfindingDirection = (_pathfindingPath[1] - _pathfindingPath[0]).Normalized();
+				}
 				_pathfindingPath.RemoveAt(0);
 			}
+		}
+
+		public void ClearNavigationData()
+		{
+			_pathfindingPath.Clear();
+			_pathfindingTimer = 0;
+			CurrentPathfindingDirection = Vector3.Zero;
+			CurrentWaypointIndex = 0;
 		}
 	}
 }
